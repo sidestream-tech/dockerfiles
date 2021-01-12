@@ -1,13 +1,5 @@
 FROM python:3.9.0
 
-# Used to build deps
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-    # deps for installing poetry
-    curl \
-    # deps for building python deps
-    build-essential
-
 ENV \
     # make poetry install to this location
     POETRY_HOME="/opt/poetry" \
