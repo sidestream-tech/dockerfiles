@@ -2,16 +2,16 @@ kind: pipeline
 name: default
 
 steps:
-    - name: check-markdown-links
-      image: node:lts
-      commands:
-        - npm i -g markdown-link-check
-        - find . -name \*.md | xargs -n1 markdown-link-check
-    - name: lint-dockerfiles
-      image: hadolint/hadolint
-      commands:
-        - hadolint **/*/Dockerfile
+  - name: check-markdown-links
+    image: node:lts
+    commands:
+      - npm i -g markdown-link-check
+      - find . -name \*.md | xargs -n1 markdown-link-check
+  - name: lint-dockerfiles
+    image: hadolint/hadolint:latest-debian
+    commands:
+      - hadolint --failure-threshold warning **/*/Dockerfile
 
 trigger:
-    event:
-        - pull_request
+  event:
+    - pull_request

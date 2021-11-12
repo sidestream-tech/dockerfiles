@@ -13,6 +13,8 @@ ENV \
     PYTHONDONTWRITEBYTECODE=1
 
 # install poetry
+# before that make sure that we fail on pipe failurese (see https://github.com/hadolint/hadolint/wiki/DL4006)
+# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 
 # add poetry to path
