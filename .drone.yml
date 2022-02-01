@@ -1,6 +1,41 @@
 kind: template
 load: pipeline-builder.star
 data:
+  builds:
+
+    # publish aws-cli-chamber-helm:main and aws-cli-chamber-helm:$MAIN_COMMIT_SHA
+    - name: publish-ci-cd-aws-cli-chamber-helm-merge-main
+      repository: ghcr.io/sidestream-tech/dockerfiles/aws-cli-chamber-helm
+      tags:
+        - "main"
+        - "${DRONE_COMMIT_SHA}"
+      labels:
+        - key: org.opencontainers.image.source
+          value: https://github.com/sidestream-tech/dockerfile
+      path_to_dockerfile: frontend/Dockerfile
+      path_to_context: ./
+      tags_to_cache_from:
+        - "main"
+      trigger:
+        event:
+          - push
+        branch:
+          - main
+
+    # test build aws-cli-chamber-helm
+    - name: build-ci-cd-aws-cli-chamber-helm-merge-main
+      repository: ghcr.io/sidestream-tech/dockerfiles/aws-cli-chamber-helm
+      labels:
+        - key: org.opencontainers.image.source
+          value: https://github.com/sidestream-tech/dockerfile
+      path_to_dockerfile: ci-cd/aws-cli-chamber-helm/Dockerfile
+      path_to_context: ci-cd/aws-cli-chamber-helm/
+      tags_to_cache_from:
+        - "main"
+      trigger:
+        event:
+          - pull_request
+
   pipelines:
     - kind: pipeline
       type: kubernetes
