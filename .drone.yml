@@ -10,7 +10,7 @@ data:
           image: node:lts
           commands:
             - npm i -g markdown-link-check
-            - find . -name "\*.md" | xargs -n1 markdown-link-check
+            - find . -name "*.md" | xargs -n1 markdown-link-check
 
         # - name: lint-dockerfiles
         #   image: hadolint/hadolint:latest-debian
