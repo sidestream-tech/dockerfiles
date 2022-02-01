@@ -9,7 +9,6 @@ data:
 
         - name: success
           image: alpine
-          depends_on: ["check-markdown-links", "lint-dockerfiles"]
           commands:
             - echo "success"
 
