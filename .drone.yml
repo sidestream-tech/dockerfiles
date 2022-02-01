@@ -12,14 +12,14 @@ data:
             - npm i -g markdown-link-check
             - find . -name "*.md" | xargs -n1 markdown-link-check
 
-        # - name: lint-dockerfiles
-        #   image: hadolint/hadolint:latest-debian
-        #   commands:
-        #     - find . -name \Dockerfile | xargs -n1 hadolint --failure-threshold warning
+        - name: lint-dockerfiles
+          image: hadolint/hadolint:latest-debian
+          commands:
+            - find . -name Dockerfile | xargs -n1 hadolint --failure-threshold warning
 
         - name: success
           image: alpine
-          depends_on: ["check-markdown-links"]
+          depends_on: ["check-markdown-links", "lint-dockerfiles"]
           commands:
             - echo "success"
 
