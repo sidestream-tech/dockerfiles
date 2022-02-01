@@ -2,7 +2,28 @@ kind: template
 load: pipeline-builder.star
 data:
   builds:
+    # test builds during PRs
+    # aws-cli-chamber-helm
+    - name: build-ci-cd-aws-cli-chamber-helm-on-pr
+      repository: ghcr.io/sidestream-tech/dockerfiles/aws-cli-chamber-helm
+      path_to_dockerfile: ci-cd/aws-cli-chamber-helm/Dockerfile
+      path_to_context: ci-cd/aws-cli-chamber-helm/
+      tags_to_cache_from:
+        - "main"
+      trigger:
+        event:
+          - pull_request
+    - name: build-ci-cd-docker-in-docker-chamber-on-pr
+      repository: ghcr.io/sidestream-tech/dockerfiles/docker-in-docker-chamber
+      path_to_dockerfile: ci-cd/docker-in-docker-chamber/Dockerfile
+      path_to_context: ci-cd/docker-in-docker-chamber/
+      tags_to_cache_from:
+        - "main"
+      trigger:
+        event:
+          - pull_request
 
+    # publish images on merge to main
     # publish aws-cli-chamber-helm:main and aws-cli-chamber-helm:$MAIN_COMMIT_SHA
     - name: publish-ci-cd-aws-cli-chamber-helm-merge-main
       repository: ghcr.io/sidestream-tech/dockerfiles/aws-cli-chamber-helm
@@ -11,9 +32,9 @@ data:
         - "${DRONE_COMMIT_SHA}"
       labels:
         - key: org.opencontainers.image.source
-          value: https://github.com/sidestream-tech/dockerfile
-      path_to_dockerfile: frontend/Dockerfile
-      path_to_context: ./
+          value: https://github.com/sidestream-tech/dockerfiles
+      path_to_dockerfile: ci-cd/aws-cli-chamber-helm/Dockerfile
+      path_to_context: ci-cd/aws-cli-chamber-helm/
       tags_to_cache_from:
         - "main"
       trigger:
@@ -22,19 +43,24 @@ data:
         branch:
           - main
 
-    # test build aws-cli-chamber-helm
-    - name: build-ci-cd-aws-cli-chamber-helm-merge-main
-      repository: ghcr.io/sidestream-tech/dockerfiles/aws-cli-chamber-helm
+    # publish ci-cd-docker-in-docker-chamber:main and ci-cd-docker-in-docker-chamber:$MAIN_COMMIT_SHA
+    - name: publish-ci-cd-docker-in-docker-chamber-merge-main
+      repository: ghcr.io/sidestream-tech/dockerfiles/docker-in-docker-chamber
+      tags:
+        - "main"
+        - "${DRONE_COMMIT_SHA}"
       labels:
         - key: org.opencontainers.image.source
-          value: https://github.com/sidestream-tech/dockerfile
-      path_to_dockerfile: ci-cd/aws-cli-chamber-helm/Dockerfile
-      path_to_context: ci-cd/aws-cli-chamber-helm/
+          value: https://github.com/sidestream-tech/dockerfiles
+      path_to_dockerfile: ci-cd/docker-in-docker-chamber/Dockerfile
+      path_to_context: ci-cd/docker-in-docker-chamber/
       tags_to_cache_from:
         - "main"
       trigger:
         event:
-          - pull_request
+          - push
+        branch:
+          - main
 
   pipelines:
     - kind: pipeline
