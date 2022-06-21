@@ -22,7 +22,15 @@ data:
       trigger:
         event:
           - pull_request
-
+    - name: build-ci-cd-aws-cli-chamber-helmsman-on-pr
+      repository: ghcr.io/sidestream-tech/dockerfiles/aws-cli-chamber-helmsman
+      path_to_dockerfile: ci-cd/aws-cli-chamber-helmsman/Dockerfile
+      path_to_context: ci-cd/aws-cli-chamber-helmsman/
+      tags_to_cache_from:
+        - "main"
+      trigger:
+        event:
+          - pull_request
     # publish images on merge to main
     # publish aws-cli-chamber-helm:main and aws-cli-chamber-helm:$MAIN_COMMIT_SHA
     - name: publish-ci-cd-aws-cli-chamber-helm-merge-main
@@ -62,6 +70,23 @@ data:
         branch:
           - main
 
+    - name: publish-ci-cd-aws-cli-chamber-helmsman-merge-main
+      repository: ghcr.io/sidestream-tech/dockerfiles/aws-cli-chamber-helmsman
+      tags:
+        - "main"
+        - "${DRONE_COMMIT_SHA}"
+      labels:
+        - key: org.opencontainers.image.source
+          value: https://github.com/sidestream-tech/dockerfiles
+      path_to_dockerfile: ci-cd/aws-cli-chamber-helmsman/Dockerfile
+      path_to_context: ci-cd/aws-cli-chamber-helmsman/
+      tags_to_cache_from:
+        - "main"
+      trigger:
+        event:
+          - push
+        branch:
+          - main
   pipelines:
     - kind: pipeline
       type: kubernetes
