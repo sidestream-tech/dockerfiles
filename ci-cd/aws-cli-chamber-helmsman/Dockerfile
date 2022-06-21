@@ -4,6 +4,7 @@ COPY --from=chamber /chamber /usr/local/bin/chamber
 # * Helm diff # https://github.com/databus23/helm-diff
 RUN helm plugin install https://github.com/databus23/helm-diff
 # * helmsman # https://github.com/Praqma/helmsman#install
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -L https://github.com/Praqma/helmsman/releases/download/v3.11.0/helmsman_3.11.0_linux_amd64.tar.gz | tar zx
 RUN mv helmsman /usr/local/bin/helmsman
-CMD "/bin/bash"
+CMD ["/bin/bash"]
