@@ -34,10 +34,13 @@ FROM python-base as building-base
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
-    curl \
-    build-essential
+    curl=7.74.0-1.3+deb11u1 \
+    build-essential=12.9
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN apt-get purge curl build-essential -y
 
 CMD ["poetry"]
