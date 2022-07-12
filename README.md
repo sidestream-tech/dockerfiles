@@ -4,8 +4,8 @@ Repository for a collection of `Dockerfile`s that have helped us during developm
 
 Currently, we offer:
 
-- `python/3.{8, 9}(-slim)/poetry`: Where `poetry` is the amazing [python package manager](https://python-poetry.org/). So far other images we found were outdated and unmaintained. We wanted to change that, as we believe in `poetry` as the future of python package management
-  - image name: `sidestream/python-poetry`
+- `python-poetry`: Where `poetry` is the amazing [python package manager](https://python-poetry.org/). So far other images we found were outdated and unmaintained. We wanted to change that, as we believe in `poetry` as the future of python package management and thats why are we using [`acidrain`'s](https://hub.docker.com/u/acidrain) `Dockerfile`s [`python-poetry`](https://hub.docker.com/r/acidrain/python-poetry). They are very good 🙂
+  - image name example: `acidrain/python-poetry:3.9-slim`
 - `ci-cd/aws-cli-chamber-helm`: `aws-cli` + `chamber` + `helm` images and files in order to support our continuous delivery, where:
   - `aws-cli` is used to connect to AWS infrastructure
   - `chamber` is used to securely inject secrets into the deployment,
