@@ -5,7 +5,7 @@ Repository for a collection of `Dockerfile`s that have helped us during developm
 Currently, we offer:
 - `python-poetry`: Where `poetry` is the amazing [python package manager](https://python-poetry.org/). So far other images we found were outdated and unmaintained. We recommend to use [`acidrain`'s](https://hub.docker.com/u/acidrain) `Dockerfile`s [`python-poetry`](https://hub.docker.com/r/acidrain/python-poetry). They are very good 🙂
     - image name example: `acidrain/python-poetry:3.9-slim`
-- `ci-cd/aws-cli-chamber-helm`: `aws-cli` + `chamber` + `helm` images and files in order to support our continuous delivery, where:
+- `ci-cd/aws-cli-chamber-helm`: `aws-cli`+`chamber`+`helm` images and files in order to support our continuous delivery, where:
     - `aws-cli` is used to connect to AWS infrastructure
     - `chamber` is used to securely inject secrets into the deployment,
     - `helm` is used to deploy the application
