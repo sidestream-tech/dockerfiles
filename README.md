@@ -10,7 +10,7 @@ Currently, we offer:
     - `chamber` is used to securely inject secrets into the deployment,
     - `helm` is used to deploy the application
     - image name: `sidestream/aws-cli-chamber-helm`
-- `ci-cd/aws-cli-chamber-helmsman`: `aws-cli` + `chamber` + `helm` + `helmsman` images and files in order to support our continuous delivery, where:
+- `ci-cd/aws-cli-chamber-helmsman`: `aws-cli` + `chamber`  + `helm` + `helmsman`  images and files in order to support our continuous delivery, where:
     - `aws-cli` is used to connect to AWS infrastructure
     - `chamber` is used to securely inject secrets into the deployment,
     - `helm` is used to deploy the application
