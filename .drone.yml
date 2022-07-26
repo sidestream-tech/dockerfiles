@@ -31,9 +31,9 @@ data:
       trigger:
         event:
           - pull_request
-    - name: build-ci-cd-aws-az-cli-chamber-helmsman-on-pr
+    - name: build-ci-cd-aws-az-cli-chamber-helm-on-pr
       repository: ghcr.io/sidestream-tech/dockerfiles/aws-az-cli-chamber-helm
-      path_to_dockerfile: ci-cd/aws-az-cli-chamber-helms/Dockerfile
+      path_to_dockerfile: ci-cd/aws-az-cli-chamber-helm/Dockerfile
       path_to_context: ci-cd/aws-az-cli-chamber-helm/
       tags_to_cache_from:
         - "main"
@@ -97,6 +97,7 @@ data:
           - push
         branch:
           - main
+
     - name: publish-ci-cd-aws-az-cli-chamber-helm-merge-main
       repository: ghcr.io/sidestream-tech/dockerfiles/aws-az-cli-chamber-helm
       tags:
@@ -114,6 +115,7 @@ data:
           - push
         branch:
           - main
+
   pipelines:
     - kind: pipeline
       type: kubernetes
