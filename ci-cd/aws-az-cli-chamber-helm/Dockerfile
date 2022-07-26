@@ -11,6 +11,6 @@ RUN apk add --no-cache -q --virtual=build gcc=10.3.1_git20210424-r2 \
     openssl-dev=1.1.1q-r0 \
     cargo=1.52.1-r1 \
     make=4.3-r0
-RUN pip install pip==22.2
+RUN pip install --no-cache-dir pip==22.2
 RUN pip install --no-cache-dir azure-cli==2.38.0
 RUN apk del --purge build
